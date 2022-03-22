@@ -1,0 +1,112 @@
+*, *::after, *::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--color-background: #404040;
+	--color-button-standard: #0060c0;
+	--color-button-standard-highlight: #2080e0;
+	--color-button-red: #ff2020;
+	--color-button-text: white;
+	--color-content-background: white;
+	--color-content-text: black;
+	--color-content-text-ancillary: #606060;
+	--color-list-background: silver;
+}
+
+body {
+	background-color: var(--color-background);
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* LAYOUT CLASSES */
+
+.page-container {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+
+.list-holder {
+	align-items: center;
+	background-color: var(--color-content-background);
+	border-radius: 8px;
+	box-shadow: 2px 2px 0px black;
+	color: var(--color-content-text-ancillary);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	max-width: 800px;
+	padding: 10px 20px;
+	width: 100%;
+}
+
+.todo-list {
+	background-color: var(--color-list-background);
+	border-radius: 4px;
+	counter-reset: todo;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 8px;
+	width: 100%;
+}
+
+.todo-item {
+	align-items: flex-start;
+	background-color: var(--color-content-background);
+	border-radius: 2px;
+	color: var(--color-content-text);
+	display: flex;
+	justify-content: space-between;
+	padding: 2px 8px 2px 24px;
+	position: relative;
+}
+
+.todo-item::before {
+	color: var(--color-content-text-ancillary);
+	counter-increment: todo;
+	content: counter(todo) ":";
+	left: 2px;
+	position: absolute;
+	text-align: right;
+	top: 2px;
+	width: 20px;
+}
+
+/* UTILITY CLASSES */
+
+.btn {
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+	text-align: center;
+	transition: 0.25s background-color, 0.25s color;
+}
+
+.btn--highlight-red:hover {
+	background-color: var(--color-button-red);
+	color: var(--color-button-text);
+}
+
+.btn--plain {
+	background-color: transparent;
+	color: var(--color-content-text-ancillary);
+	font-weight: bold;
+	padding: 2px 4px;
+}
+
+.btn--standard {
+	background-color: var(--color-button-standard);
+	color: var(--color-button-text);
+	padding: 4px 8px;
+}
+
+.btn--standard:hover {
+	background-color: var(--color-button-standard-highlight);
+}
