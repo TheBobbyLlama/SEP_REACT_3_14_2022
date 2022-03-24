@@ -9,13 +9,31 @@
 </head>
 <body>
 	<main class="page-container">
-		<div class="list-holder">
+		<div class="list-panel">
 			<h1>To-Do List</h1>
 			<ol id="todoList" class="todo-list">
 			</ol>
-			<input id="btnAdd" type="button" class="btn btn--standard" value="Add New" />
 		</div>
 	</main>
+	<div id="modalBG" class="modalbg hide">
+		<form id="deleteForm" class="modal hide">
+			<div class="modal__row">
+				<div></div>
+				<h2>Delete</h2>
+				<div>
+					<input type="button" class="btn btn--plain btn--highlight-red" value="X" />
+				</div>
+			</div>
+			<div class="modal__row">
+				<p id="deleteText" class="modal__text">
+					Text here
+				</p>
+			</div>
+			<div class="modal__row modal__row--center">
+				<input id="btnDeleteConfirm" type="button" class="btn btn--standard" value="Delete" />
+			</div>
+		</form>
+	</div>
 	<script src="./assets/js/script.js"></script>
 </body>
 </html>

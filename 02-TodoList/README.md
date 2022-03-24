@@ -2,6 +2,6 @@
 
 ## To-Do List
 
-Add and Remove buttons are fully functional, with simple `window` prompts for performing actions.
+Add and Remove buttons are fully functional.  To-do list is saved/retrieved in local storage.
 
 ![HTML Output](./snapshot.png)
