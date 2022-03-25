@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Now Playing!</title>
+	<link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+	<main class="page-container">
+		<header class="page-header">
+			<h1>Now Playing!</h1>
+		</header>
+		<section class="carousel-holder">
+			<div class="carousel-holder__btn">
+				<button id="movieCarouselBack" class="btn btn--large carousel-holder__btn invisible">◄</button>
+			</div>
+			<div id="movieCarousel" class="carousel">
+				<div class="simple-center">
+					<!-- From https://loading.io/css/ -->
+					<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+				</div>
+			</div>
+			<div class="carousel-holder__btn">
+				<button id="movieCarouselForward" class="btn btn--large carousel-holder__btn invisible">►</button>
+			</div>
+		</section>
+	</main>
+	<script src="./assets/js/movieAPI.js"></script>
+	<script src="./assets/js/script.js"></script>
+</body>
+</html>

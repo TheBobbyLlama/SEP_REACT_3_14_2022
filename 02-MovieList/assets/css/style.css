@@ -1,0 +1,228 @@
+*, *::after, *::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--card-movie-padding: 4px;
+	--card-movie-height: 400px;
+	--card-movie-width: 200px;
+	--color-carousel-background: #080410;
+	--color-carousel-border: #302040;
+	--color-page-background: black;
+	--color-page-text: white;
+	--color-text-ancillary: silver;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+body {
+	align-items: center;
+	background-color: var(--color-page-background);
+	bottom: 0;
+	color: var(--color-page-text);
+	display: flex;
+	justify-content: center;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+
+.carousel-holder {
+	align-items: center;
+	background-image: linear-gradient(transparent, transparent, var(--color-carousel-background));
+	border: solid 4px var(--color-carousel-border);
+	border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+	padding: 20px 8px;
+}
+
+/* Fix alignment of buttons */
+.carousel-holder__btn:first-child .btn--large {
+	left: 16px;
+	padding: 4px 6px 4px 2px;
+	position: relative;
+	z-index: 10;
+}
+
+.carousel-holder__btn:last-child .btn--large {
+	padding: 4px 2px 4px 6px;
+	position: relative;
+	right: 16px;
+	z-index: 10;
+}
+
+.carousel {
+	height: var(--card-movie-height);
+	overflow: hidden;
+	width: calc(var(--card-movie-width) * 4);
+}
+
+.carousel-content {
+	display: flex;
+	height: var(--card-movie-height);
+	overflow: hidden;
+	width: calc(var(--card-movie-width) * 4);
+}
+
+.carousel-content--scroll-left > * {
+	animation: carousel-scoll-left 0.5s ease-in-out;
+	position: relative;
+}
+
+.carousel-content--scroll-right > * {
+	animation: carousel-scroll-right 0.5s ease-in-out;
+	position: relative;
+	right: var(--card-movie-width);
+}
+
+.movie-card {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	height: var(--card-movie-height);
+	min-width: var(--card-movie-width);
+	overflow: hidden;
+	padding: var(--card-movie-padding);
+	width: var(--card-movie-width);
+}
+
+.movie-card__image {
+	background-position: center;
+	background-size: cover;
+	border-radius: var(--card-movie-padding);
+	height: calc(1.5 * (var(--card-movie-width) - 2 * var(--card-movie-padding))); /* 1.5 x width */
+	width: calc(var(--card-movie-width) - 2 * var(--card-movie-padding));
+}
+
+.movie-card__info {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 8px;
+	justify-content: space-between;
+}
+
+.movie-card__info h2 {
+	font-size: 1.25em;
+}
+
+.movie-card__info p {
+	font-style: italic;
+}
+
+/* UTILITY */
+
+.btn {
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	padding: 4px;
+	transition: 0.25s background-color, 0.25s color;
+}
+
+.btn--large {
+	background-color: var(--color-page-background);
+	border: solid 2px var(--color-carousel-border);
+	border-radius: 50%;
+	color: var(--color-text-ancillary);
+	font-size: 2em;
+	height: 48px;
+	width: 48px;
+}
+
+.btn--large[disabled] {
+	border-color: var(--color-page-background);
+	color: gray;
+	pointer-events: none;
+	transition: 0s;
+}
+
+.btn--large:hover {
+	background-color: var(--color-carousel-background);
+	color: var(--color-page-text);
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+/* From https://loading.io/css/ */
+.lds-ring {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+}
+
+.lds-ring div {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	border: 8px solid var(--color-page-text);
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: var(--color-page-text) transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+}
+
+.simple-center {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	width: 100%;
+}
+
+/* ANIMATIONS */
+
+@keyframes carousel-scoll-left {
+	0% {
+		left: calc(-1 * var(--card-movie-width));
+	}
+	100% {
+		left: 0px;
+	}
+}
+
+@keyframes carousel-scroll-right {
+	0% {
+		right: 0px;
+	}
+	100% {
+		right: var(--card-movie-width);
+	}
+}
+
+@keyframes lds-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
