@@ -11,17 +11,23 @@ const domLookup = {
 /* LIST SCROLLING LOGIC */
 let scrollIndex = 0;
 
-function setScrollButtonVisiblity() {
+function hideScrollButtons() {
+	if (scrollIndex <= 0) {
+		domLookup.elementCarouselBack.classList.add("invisible");
+	}
+
+	if (scrollIndex + carouselCount >= movieAPI.data.length) {
+		domLookup.elementCarouselForward.classList.add("invisible");
+	}
+}
+
+function showScrollButtons() {
 	if (scrollIndex > 0) {
 		domLookup.elementCarouselBack.classList.remove("invisible");
-	} else {
-		domLookup.elementCarouselBack.classList.add("invisible");
 	}
 
 	if (scrollIndex + carouselCount < movieAPI.data.length) {
 		domLookup.elementCarouselForward.classList.remove("invisible");
-	} else {
-		domLookup.elementCarouselForward.classList.add("invisible");
 	}
 }
 
@@ -32,9 +38,11 @@ function scrollMovies(direction) {
 
 	// Disable buttons during animation to prevent herky jerky spam
 	domLookup.elementCarouselBack.disabled = domLookup.elementCarouselForward.disabled = true;
+	hideScrollButtons();
 
 	setTimeout(() => {
 		domLookup.elementCarouselBack.disabled = domLookup.elementCarouselForward.disabled = false;
+		showScrollButtons();
 	}, 500);
 }
 
@@ -51,7 +59,7 @@ function generateMovieCardHtml(movie) {
 }
 
 function generateMovieCarouselHtml(start, direction) {
-	// Prepare HTML
+	// Prepare HTML - Include items that are left behind by the new position so they can be animated scrolling away.
 	const movieCards = movieAPI.data.slice(
 		(direction > 0) ? start - 1 : start,
 		(direction < 0) ? start + carouselCount + 1 : start + carouselCount)
@@ -72,11 +80,18 @@ function generateMovieCarouselHtml(start, direction) {
 	</div>`;
 }
 
+function showAPIError() {
+	render(domLookup.elementCarousel,
+		`<div class="simple-center">
+			<h2>An error occurred loading the movie list.  Please try again later.</h2>
+		</div>`
+	);
+}
+
 /* DOM MANIPULATION */
 
 function renderMovieCarousel(start, direction) {
 	render(domLookup.elementCarousel, generateMovieCarouselHtml(start, direction));
-	setScrollButtonVisiblity();
 }
 
 function render(element, content) {
@@ -92,6 +107,8 @@ function bindDomEvents() {
 
 movieAPI.loadData().then(_ => {
 	renderMovieCarousel(0, 0);
-});
+	hideScrollButtons();
+	showScrollButtons();
+}, showAPIError);
 
 bindDomEvents();

@@ -7,12 +7,18 @@ class MovieAPI {
 		return this._data;
 	}
 	loadData() {
-		return new Promise((res,) => {
+		return new Promise((res, rej) => {
 			fetch(`${this.source}/movies`)
-			.then(response => response.json())
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					rej(false)
+				}
+			}, rej)
 			.then(json => {
 				this._data = json;
-				res(json);
+				res(true);
 			});
 		});
 	}

@@ -80,10 +80,13 @@ body {
 	position: relative;
 }
 
+.carousel-content--scroll-right {
+	justify-content: flex-end;
+}
+
 .carousel-content--scroll-right > * {
 	animation: carousel-scroll-right 0.5s ease-in-out;
 	position: relative;
-	right: var(--card-movie-width);
 }
 
 .movie-card {
@@ -211,10 +214,10 @@ body {
 
 @keyframes carousel-scroll-right {
 	0% {
-		right: 0px;
+		right: calc(-1 * var(--card-movie-width));
 	}
 	100% {
-		right: var(--card-movie-width);
+		right: 0px;
 	}
 }
 
